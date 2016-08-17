@@ -1,15 +1,24 @@
 /**
- * Created by Alexis on 8/17/2016.
+ * Created by Alexis Alulema on 8/17/2016.
  */
 
-var MainController = function($scope, $http) {
-    $http.get("https://api.github.com/users/robconery")
+(function () {
+    var app = angular.module("githubViewer", []);
 
-    var person = {
-        firstName: "Alexis",
-        lastName: "Alulema",
-        imageSrc: "http://ep01.epimg.net/iconos/v1.x/v1.0/banderas/svg/ecu.svg"
+    var MainController = function($scope, $http) {
+        var onFullfillment = function (response) {
+            $scope.user = response.data;
+        };
+
+        var onRejection = function (response) {
+            $scope.error = "Could not fetch the user";
+        };
+
+        $http.get("https://api.github.com/users/robconery").then(onFullfillment, onRejection);
+
+        $scope.message = "Hello Angular!";
     };
-    $scope.message = "Hello Angular!";
-    $scope.person = person;
-};
+
+    app.controller("MainController", ["$scope", "$http", MainController]);
+}());
+
