@@ -13,9 +13,13 @@
         {{ error }}
     </div>
 
+    {{ username }}
+    <form name="searchUser">
+        <input type="search" placeholder="Username to find" ng-model="username">
+        <input type="submit" value="Search" ng-click="search(username)">
+    </form>
+
     <div>
-        <!--<div>First Name: {{ person.firstName }}</div>-->
-        <!--<div>Last Name: {{ person.lastName }}</div>-->
         <div>
             Name: {{ user.name }}
         </div>
@@ -23,9 +27,25 @@
             Location: {{ user.location }}
         </div>
         <div>
-            <!--<img ng-src="{{ person.imageSrc }}" title="{{ person.firstName }} {{ person.lastName }}">-->
             <img ng-src="{{ user.avatar_url }}" title="{{ user.name }}">
         </div>
+
+        <table>
+            <thead>
+            <tr>
+                <th>Name</th>
+                <th>Stars</th>
+                <th>Language</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="repo in repos">
+                <td>{{ repo.name }}</td>
+                <td>{{ repo.stargazers_count | number: 1 }}</td>
+                <td>{{ repo.language }}</td>
+            </tr>
+            </tbody>
+        </table>
     </div>
 </body>
 </html>
