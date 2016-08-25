@@ -23,6 +23,7 @@
                 $scope.countdown = null;
             }
             // TODO: your code
+            $location.path("/user/" + username);
         };
 
         $scope.username = "angular";

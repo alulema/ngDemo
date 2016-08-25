@@ -1,14 +1,20 @@
-'use strict';
-
-// Declare app level module which depends on views, and components
-angular.module('myApp', [
-  'ngRoute',
-  'myApp.view1',
-  'myApp.view2',
-  'myApp.version'
-]).
-config(['$locationProvider', '$routeProvider', function($locationProvider, $routeProvider) {
-  $locationProvider.hashPrefix('!');
-
-  $routeProvider.otherwise({redirectTo: '/view1'});
-}]);
+(function () {
+    var app = angular.module("githubViewer", [ "ngRoute" ]);
+    
+    app.config(function ($routeProvider) {
+        $routeProvider
+            .when("/main", {
+                templateUrl: "main.html",
+                controller: "MainController"
+            })
+            .when("/user/:username", {
+                templateUrl: "user.html",
+                controller: "UserController"
+            })
+            .when("/repo/:username/:reponame", {
+                templateUrl: "repo.html",
+                controller: "RepoController"
+            })
+            .otherwise({ redirectTo: "/main" })
+    });
+}());
